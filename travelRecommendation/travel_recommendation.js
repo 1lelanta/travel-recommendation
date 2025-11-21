@@ -1,13 +1,12 @@
 let travelData = [];
 
-fetch("travel_recommendation_api.json")
+fetch("travelRecommendation/travel_recommendation_api.json")
   .then(res => res.json())
   .then(data => {
+      console.log("API Loaded:", data);
       travelData = data;
-      console.log("API Loaded:", travelData);
   })
   .catch(err => console.error("Error loading API:", err));
-
 
 // SEARCH FUNCTION
 function search() {
@@ -22,21 +21,21 @@ function search() {
 
     let results = [];
 
-    // ★ BEACH SEARCH
+    // BEACH SEARCH
     if (keyword.includes("beach") || keyword.includes("beaches")) {
         results = travelData.beaches;
         displayResults(results);
         return;
     }
 
-    // ★ TEMPLE SEARCH
+    //  TEMPLE SEARCH
     if (keyword.includes("temple") || keyword.includes("temples")) {
         results = travelData.temples;
         displayResults(results);
         return;
     }
 
-    // ★ COUNTRY SEARCH (Australia, Japan, Brazil…)
+    // COUNTRY SEARCH (Australia, Japan, Brazil…)
     const countryMatch = travelData.countries.find(country =>
         country.name.toLowerCase().includes(keyword)
     );
